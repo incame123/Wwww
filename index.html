@@ -1,3 +1,16 @@
+--- START OF FILE index.html ---
+
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'f052b1e4c03b5ca46b481d4432d5f67d',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/f052b1e4c03b5ca46b481d4432d5f67d/invoke.js"></script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,6 +67,8 @@
             text-align: center;
             box-shadow: 0 8px 32px 0 var(--button-shadow);
             animation: fadeInContainer 1s ease-out;
+            z-index: 1; /* Ensure container is above ::before pseudo-element if ad positioning conflicts */
+            position: relative; /* For z-index to take effect */
         }
 
         @keyframes fadeInContainer {
@@ -304,7 +319,7 @@
             background-size: 50px 50px, 30px 30px;
             background-position: 0 0, 15px 15px;
             opacity: 0.5;
-            z-index: -1;
+            z-index: -1; /* Make sure it's behind content */
             animation: subtleSparkle 20s linear infinite;
         }
 
@@ -313,9 +328,26 @@
             100% { background-position: 50px 50px, 45px 45px; }
         }
 
+        /* Styling for ad containers for centering, if needed. Ads usually handle their own layout. */
+        .ad-banner-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px; /* Adjust as needed */
+            margin-bottom: 10px; /* Adjust as needed */
+            /* The ad script itself might inject an iframe of specific dimensions */
+        }
+
+
     </style>
 </head>
 <body>
+    <div class="ad-banner-container" id="top-ad-container">
+        <!-- Top ad script will be placed here by the main script that includes this file -->
+        <!-- Or, if this is the final file, the script is already at the top of the file -->
+    </div>
+
     <div class="container">
         <img src="eid.gif" alt="Eid Mubarak Animation" class="eid-gif">
         
@@ -452,5 +484,18 @@
             });
         });
     </script>
+
+    <div class="ad-banner-container" id="bottom-ad-container">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'f052b1e4c03b5ca46b481d4432d5f67d',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/f052b1e4c03b5ca46b481d4432d5f67d/invoke.js"></script>
+    </div>
 </body>
-</html>
+    </html>
