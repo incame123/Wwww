@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak!</title>
+    <style>
+        :root {
+            --bg-gradient-start: #4a0342; /* Deep Purple */
+            --bg-gradient-end: #0f003b;   /* Darker Blue/Purple */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-color: #f0f0f0;
+            --text-color-secondary: #c0c0c0;
+            --accent-color-1: #ffcc33; /* Gold */
+            --accent-color-2: #ff8f40; /* Festive Orange */
+            --button-generate-bg-start: #e733ff; /* Neon Pink */
+            --button-generate-bg-end: #8c1eff;   /* Neon Purple */
+            --button-shadow: rgba(0, 0, 0, 0.3);
+            --whatsapp-green: #25D366;
+            --input-bg: rgba(255, 255, 255, 0.1);
+            --input-border: rgba(255, 255, 255, 0.3);
+            --font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            padding: 25px 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 var(--button-shadow);
+            animation: fadeInContainer 1s ease-out;
+        }
+
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .eid-gif {
+            max-width: 100%;
+            height: auto;
+            min-height: 150px; /* Min height for consistency */
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .main-greeting {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: 700;
+            margin-bottom: 25px;
+            line-height: 1.4;
+            background: linear-gradient(to right, var(--accent-color-1), var(--accent-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-shadow: 0 0 8px rgba(255, 204, 51, 0.3);
+            animation: fadeInGreeting 1.5s ease-out 0.5s forwards;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        @keyframes fadeInGreeting {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #nameInput {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #nameInput::placeholder {
+            color: var(--text-color-secondary);
+            opacity: 0.8;
+        }
+
+        #nameInput:focus {
+            outline: none;
+            border-color: var(--accent-color-1);
+            box-shadow: 0 0 10px rgba(255, 204, 51, 0.3);
+        }
+
+        .btn {
+            padding: 14px 20px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none; /* For potential <a> tags if used as button */
+        }
+
+        .generate-btn {
+            background: linear-gradient(to right, var(--button-generate-bg-start), var(--button-generate-bg-end));
+            color: white;
+            box-shadow: 0 4px 15px var(--button-shadow);
+            border: 1px solid transparent; /* For outline effect on hover */
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--button-shadow);
+            filter: brightness(1.1);
+        }
+        .generate-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 10px var(--button-shadow);
+        }
+        /* Outline variant for "Generate" button as per request */
+        .generate-btn {
+            border: 2px solid var(--accent-color-1); /* Initial outline */
+            background: transparent; /* Make it a ghost button style initially */
+            color: var(--accent-color-1); /* Text color matching outline */
+        }
+
+        .generate-btn:hover {
+            background: linear-gradient(to right, var(--button-generate-bg-start), var(--button-generate-bg-end)); /* Fill on hover */
+            color: white; /* Text color changes on hover */
+            border-color: transparent; /* Remove border or change it if needed */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--button-shadow);
+        }
+
+
+        .custom-message-area {
+            margin-top: 25px;
+            padding: 18px;
+            background: var(--input-bg);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: var(--text-color);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .custom-message-area p {
+            word-break: break-word;
+        }
+
+        .share-btn {
+            background-color: var(--whatsapp-green);
+            color: white;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .share-btn:hover {
+            background-color: #1ebe58;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        .share-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .share-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Visibility transition for generated content */
+        .custom-message-area, .share-btn {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            display: none; /* Handles initial state */
+        }
+
+        .custom-message-area.visible {
+            display: block; /* Or other display type as needed */
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .share-btn.visible {
+            display: inline-flex; /* For buttons with icons */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .audio-controls {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass-bg);
+            padding: 10px;
+            border-radius: 50px; /* Pill shape */
+            box-shadow: 0 4px 12px var(--button-shadow);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+
+        .control-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .control-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+            transition: transform 0.2s ease;
+        }
+        .control-btn:hover svg {
+            transform: scale(1.1);
+        }
+
+        #volumeSlider {
+            width: 80px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            background: var(--input-bg);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #volumeSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-color-1);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #volumeSlider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--accent-color-1);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        /* Festive confetti/stars in background - subtle */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle, rgba(255,215,0,0.1) 1px, transparent 1px), /* Gold dots */
+                radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px); /* White dots */
+            background-size: 50px 50px, 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.5;
+            z-index: -1;
+            animation: subtleSparkle 20s linear infinite;
+        }
+
+        @keyframes subtleSparkle {
+            0% { background-position: 0 0, 15px 15px; }
+            100% { background-position: 50px 50px, 45px 45px; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="eid.gif" alt="Eid Mubarak Animation" class="eid-gif">
+        
+        <h1 class="main-greeting">✨ Eid Mubarak! May this Eid bring joy, peace, and prosperity to all! ✨</h1>
+
+        <div class="input-group">
+            <input type="text" id="nameInput" placeholder="Enter your name">
+            <button id="generateButton" class="btn generate-btn">Generate Eid Wish</button>
+        </div>
+
+        <div id="customMessageContainer" class="custom-message-area">
+            <!-- Custom message will appear here -->
+        </div>
+
+        <button id="shareButton" class="btn share-btn">
+            <svg viewBox="0 0 24 24">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.02c-1.5 0-2.94-.38-4.22-1.07l-.3-.18-3.12.82.83-3.04-.2-.32A8.097 8.097 0 014.13 11.9c0-4.48 3.64-8.12 8.12-8.12s8.12 3.64 8.12 8.12-3.65 8.12-8.12 8.12zm4.43-5.32c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06s-1.03-.38-1.96-1.21c-.73-.66-1.22-1.47-1.37-1.72-.14-.24-.02-.38.11-.5.11-.11.24-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42s-.54-1.3-.74-1.78c-.19-.48-.39-.42-.53-.42h-.47c-.16 0-.42.06-.64.3.22.24-.83 1.03-.83 2.5s.85 2.9 1.03 3.1c.11.16 1.67 2.54 4.05 3.56.57.24 1.03.38 1.38.48.5.14.94.12 1.3.08.39-.04 1.2-.49 1.37-.96s.18-1.02.12-1.12c-.05-.1-.16-.16-.3-.28z"/>
+            </svg>
+            Share on WhatsApp
+        </button>
+    </div>
+
+    <audio id="backgroundMusic" src="song.mp3" loop></audio>
+    
+    <div class="audio-controls">
+        <button id="volumeToggle" class="control-btn" aria-label="Toggle Mute">
+            <svg id="volumeIcon" viewBox="0 0 24 24">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+            <svg id="muteIcon" viewBox="0 0 24 24" style="display:none;">
+                <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+        </button>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" aria-label="Volume">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nameInput = document.getElementById('nameInput');
+            const generateButton = document.getElementById('generateButton');
+            const customMessageContainer = document.getElementById('customMessageContainer');
+            const shareButton = document.getElementById('shareButton');
+            
+            const audioElement = document.getElementById('backgroundMusic');
+            const volumeToggle = document.getElementById('volumeToggle');
+            const volumeIcon = document.getElementById('volumeIcon');
+            const muteIcon = document.getElementById('muteIcon');
+            const volumeSlider = document.getElementById('volumeSlider');
+
+            let generatedMessageText = '';
+
+            // --- Audio Controls ---
+            audioElement.volume = parseFloat(volumeSlider.value); // Set initial volume from slider
+
+            // Autoplay handling for modern browsers
+            // Often, autoplay is blocked until user interaction.
+            // We'll try to play and catch errors silently. If it fails, user can use controls.
+            // Removed 'autoplay' attribute from HTML to manage it via JS for better control/feedback.
+            let playPromise = audioElement.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Autoplay started!
+                }).catch(error => {
+                    // Autoplay was prevented.
+                    console.warn("Audio autoplay was prevented by the browser.", error);
+                    // You could show a "Click to play music" button here if desired.
+                });
+            }
+            
+            function updateVolumeIcon() {
+                if (audioElement.muted || audioElement.volume === 0) {
+                    volumeIcon.style.display = 'none';
+                    muteIcon.style.display = 'inline-block';
+                } else {
+                    volumeIcon.style.display = 'inline-block';
+                    muteIcon.style.display = 'none';
+                }
+            }
+
+            updateVolumeIcon(); // Set initial icon state
+
+            volumeToggle.addEventListener('click', () => {
+                audioElement.muted = !audioElement.muted;
+                updateVolumeIcon();
+            });
+
+            volumeSlider.addEventListener('input', () => {
+                audioElement.volume = parseFloat(volumeSlider.value);
+                if (audioElement.volume > 0 && audioElement.muted) {
+                    audioElement.muted = false;
+                }
+                updateVolumeIcon();
+            });
+            
+            audioElement.addEventListener('volumechange', () => {
+                // Sync slider if volume changes programmatically or due to mute
+                if (!audioElement.muted) {
+                    volumeSlider.value = audioElement.volume;
+                }
+                updateVolumeIcon();
+            });
+
+            // --- Greeting Generation ---
+            generateButton.addEventListener('click', () => {
+                const name = nameInput.value.trim();
+                if (name === '') {
+                    alert('Please enter your name to generate a wish!');
+                    nameInput.focus();
+                    return;
+                }
+
+                generatedMessageText = `Eid Mubarak from ${name}! 🎉 Wishing you happiness and blessings on this joyous occasion!`;
+                customMessageContainer.innerHTML = `<p>${generatedMessageText}</p>`;
+                
+                customMessageContainer.classList.add('visible');
+                shareButton.classList.add('visible');
+
+                // Scroll to the generated message if it's out of view
+                customMessageContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+
+            // --- WhatsApp Share ---
+            shareButton.addEventListener('click', () => {
+                if (!generatedMessageText) {
+                    // This case should ideally not happen if button is only visible after generation
+                    alert('Please generate a greeting first!');
+                    return;
+                }
+                const siteUrl = window.location.href;
+                const whatsappMessage = `${generatedMessageText}\n\nSee this Eid greeting: ${siteUrl}`;
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+                
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
